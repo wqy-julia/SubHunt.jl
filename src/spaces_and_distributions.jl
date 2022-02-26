@@ -1,6 +1,6 @@
-POMDPs.n_states(p::SubHuntPOMDP) = p.size^4*4*2+1
+n_states(p::SubHuntPOMDP) = p.size^4*4*2+1
 
-function POMDPs.stateindex(p::SubHuntPOMDP, s::SubState)
+function stateindex(p::SubHuntPOMDP, s::SubState)
     if s == END_KILL
         return n_states(p)
     else
@@ -24,7 +24,7 @@ end
 # the state space is represented by the POMDP itself
 # rand(rng::AbstractRNG, p::SubHuntPOMDP)
 
-POMDPs.states(p::SubHuntPOMDP) = p
+states(p::SubHuntPOMDP) = p
 function Base.iterate(p::SubHuntPOMDP, i::Int=1)
     if i > n_states(p)
         return nothing
@@ -54,8 +54,8 @@ function Base.rand(rng::AbstractRNG, d::SubHuntInitDist)
     return SubState(own, target, goal, false)
 end
 
-POMDPs.sampletype(::Type{SubHuntInitDist}) = SubState
+sampletype(::Type{SubHuntInitDist}) = SubState
 
-POMDPs.actions(p::SubHuntPOMDP) = 1:6
-POMDPs.n_actions(p::SubHuntPOMDP) = 6
-POMDPs.actionindex(p::SubHuntPOMDP, a::Int) = a
+actions(p::SubHuntPOMDP) = 1:6
+n_actions(p::SubHuntPOMDP) = 6
+actionindex(p::SubHuntPOMDP, a::Int) = a
